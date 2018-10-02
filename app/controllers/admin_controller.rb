@@ -97,7 +97,7 @@ class AdminController < ApplicationController
    def set
     if !session[:admin_id]
       redirect_to '/alogin'
-    end
+    else
     session[:aflag]= false
     
     @admin=Admin.find(session[:admin_id])
@@ -106,20 +106,21 @@ class AdminController < ApplicationController
 
     @detail = Missingdetail.where(area: @admin[:area], elevel:"0")
     render action: :edit
+    end
   end
    def edit
     
-    @admin=Admin.find_by_id(session[:admin_id])
-    if !@admin
-       redirect_to '/alogin'
+      @admin=Admin.find_by_id(session[:admin_id])
+      if !@admin
+         redirect_to '/alogin'
+      else
+        @detail = Missingdetail.where(area: @admin[:area], elevel:"0")
+      
+
+         if session[:aflag]
+            @d = Missingdetail.all
+         end
       end
-    @detail = Missingdetail.where(area: @admin[:area], elevel:"0")
-    
-
-       if session[:aflag]
-          @d = Missingdetail.all
-       end
-
     end
 
    def show
@@ -127,13 +128,14 @@ class AdminController < ApplicationController
      @admin=Admin.find_by_id(session[:admin_id])
      if !@admin
        redirect_to '/alogin'
-      end
-       @detail = Missingdetail.new
-        session[:admin_insert] = true
-        flash[:flag]= true
-        if session[:store_detail]
-          @detail=session[:store_detail]
-        end
+     else
+         @detail = Missingdetail.new
+          session[:admin_insert] = true
+          flash[:flag]= true
+          if session[:store_detail]
+            @detail=session[:store_detail]
+          end
+     end
    end
   def logout
     session[:admin_id]=nil

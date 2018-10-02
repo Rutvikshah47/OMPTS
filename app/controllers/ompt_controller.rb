@@ -9,6 +9,7 @@ skip_before_action :verify_authenticity_token
     session[:aflag]= true
     session[:store_detail]=nil
     session[:search]=true
+
    end
    def show
       if params[:id]
@@ -56,9 +57,12 @@ skip_before_action :verify_authenticity_token
         response = http.request(request)
 
         if session[:admin_insert]
+          
+          flash[:record_insert]=true
           redirect_to '/adminview'
         else
           flash[:user_insert_errors]=nil
+          flash[:record_insert]=true
           redirect_to '/'
         end
     end

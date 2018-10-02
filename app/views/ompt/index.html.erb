@@ -9,25 +9,7 @@
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-  <script> 
-     
-          function insert(){           
-           count = document.getElementById("count")
-           var list=document.getElementById("div1");
-           while(list.hasChildNodes())
-                list.removeChild(list.childNodes[0]);         
-           for (i=0; i<count.value; i++)
-                $("#div1").append("<div><br><input id="+i+" name='missingdetail[:id"+(i+1)+"]' type='text' placeholder='Name "+(i+1)+"'/><br></div>");
-          
-             
-         
-
-            }
-
-
-
-          
-   </script>
+  
 
  </head>
 <body >
@@ -35,6 +17,7 @@
   <%=form_for(@guser) do |user| %>
   <nav class="navbar navbar-dark bg-dark">
 <!-- Navbar content -->
+
   <div class="row">
     <div class="col-sm-3"> <%= link_to 'Home' ,"/",class: "btn btn-outline-light" %> </div>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -48,7 +31,9 @@
     <%= link_to 'Rescue Team Register' , '/signup', class: "btn btn-outline-light",:method => :get %>
     </div> 
   
-  </nav>
+    </nav>
+
+    
   <%=form_for(@detail) do |detail| %>
   <div class="container">
       <div class="row">
@@ -80,9 +65,15 @@
                <li><%= e %></li>
          <%end%>
          </ul>
+
          </div>
           <%end%>
-
+          <% if flash[:record_insert] %>
+          <div class="alert alert-primary" role="alert">
+              <p> Record Registered Successfully</p>
+          </div>
+          <% flash[:record_insert]=false %>
+          <%end%>
         </div>
         
       </div>  

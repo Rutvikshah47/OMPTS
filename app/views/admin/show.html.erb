@@ -58,6 +58,12 @@
                <p> <%= flash[:admin_insert_errors]%></p>
                </div>
          	<%end %>
+          <% if flash[:record_insert] %>
+            <div class="alert alert-primary" role="alert">
+                <p> Record Registered Successfully</p>
+            </div>
+            <% flash[:record_insert]=false %>
+          <%end%>
          
          </div>   
        <div class="form-group">

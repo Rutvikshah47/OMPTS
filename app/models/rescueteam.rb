@@ -1,6 +1,6 @@
 class Rescueteam < ApplicationRecord
 	has_secure_password
-	validates :name,length:{in:6..20}
+	validates :name,length:{in:3..20}
 
 	validates :area,presence:true
 	validates :email,format: {with:/\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i},length:{maximum:50},uniqueness:true
